@@ -9,13 +9,13 @@ typedef struct  {
 	char tipus[2];
 } Dades;
 
-char cadena[200];
+char cadena[1000];
 int opcio=0, i=0, j=0, num_atletes, k=0, l=0, m=0, n=0;
 
 
 
 void main() {
-	Dades dades[num_atletes];
+	Dades dades[10];
 	while (opcio != 4) {
 		printf("Benvingut\n");
 		printf("\t\t1- Introduir dades\n");
