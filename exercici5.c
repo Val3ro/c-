@@ -10,13 +10,13 @@ typedef struct  {
 } Dades;
 
 char cadena[1000];
-int opcio=0, i=0, j=0, num_atletes, k=0, l=0, m=0, n=0;
+int opcio=0, i=0, j=0, num_atletes, k=0, l=0, m=0, n=0,stop=0;
 
 
 
 void main() {
 	Dades dades[10];
-	while (opcio != 4) {
+	if (stop == 0) {
 		printf("Benvingut\n");
 		printf("\t\t1- Introduir dades\n");
 		printf("\t\t2- Consultar marques\n");
@@ -24,12 +24,19 @@ void main() {
 		printf("\t\t4- Sortir\n");
 		printf("\tOpcio: ");
 		scanf("%d", &opcio);
-
+		
+			if(opcio >= 1 && opcio <= 3){
+				stop = 0;
+			}else{
+				stop = 1;
+			}
+				
+				
 		switch (opcio){
 				case 1:
 						printf("Atletes: ");
 						fflush(stdin);
-						gets(cadena);
+						fgets(cadena,1000,stdin);
 
 						printf("Informacio introduida amb exit!\n");
 
@@ -48,7 +55,7 @@ void main() {
 						*/
 
 						for (n=0;n<num_atletes+1;n++){
-							while (i != 200) {
+							while (i != 1000) {
 								while (cadena[i] == '$'){
 									i++;
 								}
@@ -108,9 +115,9 @@ void main() {
 			break;
 		case 4:
 						printf("Adeuu!!!\n");
+				stop = 2;
 			break;
-		default:
-						printf("La opcio introduida no es valida\n");
+		default:printf("La opcio introduida no es valida\n");
 
 		}
 	}
