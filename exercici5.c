@@ -61,13 +61,14 @@ int cantidadNuevaInfo() {
 		index++;
 	}
 
-	if (index >= 2) {
-		if (info[1] == '0') {
+	if (index == 2 ) {
+		//el numero d'atletes es una xifra de 2 nombres, es el 10?
+		if (info[1] == '0' && info[0] == '1') {
 			//return numero atletes igual a 10
 			return 10;
 		}
 		else {
-			//return un indicador que fa referència a que hi han mes de 10 persones
+			//return un indicador que fa referÃ¨ncia a que hi han mes de 10 persones
 			return 11;
 		}
 	}
@@ -545,7 +546,7 @@ void verMarcas() {
 	}
 }
 
-//Part 3: Veure estadístiques
+//Part 3: Veure estadÃ­stiques
 void verEstadisticas() {
 
 	int j;
@@ -615,7 +616,7 @@ void verEstadisticas() {
 				}
 			}
 		}
-		//Fem el sumatori de la Mitjana arimètica.
+		//Fem el sumatori de la Mitjana arimÃ¨tica.
 		for (j = 1; j <= num_atletes; j++) {
 			if (atletes[j].prova == 'A') {
 				mitjana_a = mitjana_a + atletes[j].marca;
@@ -677,7 +678,7 @@ void main() {
 	while (run > 0) {
 
 		salutacioInical();
-		//switch per gestionar l'interacció amb l'usuari.
+		//switch per gestionar l'interacciÃ³ amb l'usuari.
 		switch (menuInicial()) {
 		case 1:
 			introducirInfo();
