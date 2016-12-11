@@ -26,7 +26,7 @@ int menuInicial() {
 }
 
 //Funcio per ordenar els diferents errors dels sistema
-void Error(int tipo_error) {
+void error(int tipo_error) {
 
 	switch (tipo_error)
 	{
@@ -483,7 +483,7 @@ void procesaNuevasPersonas(int cantidadpersonas) {
 	}
 	else {
 		//imprimim per pantalla el error 1
-		Error(1);
+		error(1);
 	}
 }
 
@@ -496,7 +496,7 @@ void contadorNuevasPersonas() {
 		procesaNuevasPersonas(10);
 		break;
 	case 11:
-		Error(1);
+		error(1);
 		break;
 	default:
 		procesaNuevasPersonas(cantidadNuevaInfo());
@@ -542,7 +542,7 @@ void verMarcas() {
 	}
 	else {
 		//Tenim 0 atletes? Error 2!
-		Error(2);
+		error(2);
 	}
 }
 
@@ -666,7 +666,7 @@ void verEstadisticas() {
 	}
 	else {
 		//No hi han atletes? Error de tipus 2 !
-		Error(2);
+		error(2);
 	}
 }
 
@@ -696,7 +696,7 @@ void main() {
 			break;
 		default:
 			//No es una de les opcions anteriors? Error de tipus 0 !
-			Error(0);	
+			error(0);	
 		}
 	}
 }
