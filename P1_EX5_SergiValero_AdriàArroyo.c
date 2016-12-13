@@ -14,6 +14,15 @@ int uncop = 0;//boolea per saludar nomes 1 cop
 char info[1000];//Cadena de caracters per interpretar la nova info
 int num_atletes = 0;// Numero d'atletes guardats
 
+/***********************************************
+*
+* @Finalitat: Imprimir el menu inicial.
+* @Parametres: ---
+* @Retorn: ---
+*
+************************************************/
+
+
 int menuInicial() {
 	int opcio;
 	printf("\t1- Introducir datos\n");
@@ -24,8 +33,13 @@ int menuInicial() {
 	scanf("%d", &opcio);
 	return opcio;
 }
-
-//Funcio per ordenar els diferents errors dels sistema
+/***********************************************
+*
+* @Finalitat: Ordenar els diferents errors dels sistema.
+* @Parametres: in: tipo_error
+* @Retorn: ---
+*
+************************************************/
 void error(int tipo_error) {
 
 	switch (tipo_error)
@@ -42,7 +56,13 @@ void error(int tipo_error) {
 	}
 }
 
-//Funcio per dir "Benvenido" nomes un cop
+/***********************************************
+*
+* @Finalitat: Dir "Benvenido" nomes un cop.
+* @Parametres:---
+* @Retorn: ---
+*
+************************************************/
 void salutacioInical() {
 	
 	if (uncop == 0){
@@ -53,7 +73,13 @@ void salutacioInical() {
 
 
 //Part 1: Introduir dades
-	//Aquesta funcio retorna el nombre d'aletes de la cadena
+/***********************************************
+*
+* @Finalitat: Retornar el nombre d'aletes de la cadena.
+* @Parametres:---
+* @Retorn: Retorna la cantitat de nous atletes
+*
+************************************************/
 int cantidadNuevaInfo() {
 	int index = 0;
 	
@@ -77,14 +103,20 @@ int cantidadNuevaInfo() {
 		return info[0] - '0';
 	}
 }
-
-//Aquesta funcio ens revisa si la informacio entrada es correcte respecte a las dates
+/***********************************************
+*
+* @Finalitat: Revisa si la informacio entrada és correcte respecte a las dates.
+* @Parametres:---
+* @Retorn: Retorna 0 si la data es correcte o retorna el numero d'atleta que té una data incorrecte 
+*
+************************************************/
 int tiempoCorrecto() {
 	int index = 0;
 	int total = 0;
 	int personas;
 	int OK = 0;
 	int persona_fora_temps=0;
+	int explicacio_error = 0;
 	//Saltem el nombre de atletes
 		while (info[index] != '$') {
 			index++;
@@ -137,114 +169,169 @@ int tiempoCorrecto() {
 		}
 
 		//Comprovem que dia,mes,any estan be !
-		if (any % 4 == 0) {
-			// anyo bisiesto
-			// vigilem amb :febrer 29
-			switch (mes)
-			{
-			case 1:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 2:
-				if (dia >= 1 && dia <= 29) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-
-			case 3:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 4:
-				if (dia >= 1 && dia <= 30) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 5:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 6:
-				if (dia >= 1 && dia <= 30) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 7:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 8:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 9:
-				if (dia >= 1 && dia <= 30) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 10:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 11:
-				if (dia >= 1 && dia <= 30) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
-			case 12:
-				if (dia >= 1 && dia <= 31) {
-					OK = 1;
-				}
-				else {
-					OK = 0;
-				}
-				break;
 			
-			default:
-				OK = 0;
-				break;
+
+				if (any % 4 == 0) {
+					
+
+					
+					// año bisiesto
+					// vigilem amb :febrer 29
+					switch (mes)
+					{
+					case 1:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 2:
+
+						if (any % 100 == 0) {
+							if (any % 400 == 0) {
+								//Año bisiesto
+								if (dia >= 1 && dia <= 29) {
+
+									OK = 1;
+								}
+								else {
+									OK = 0;
+									printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+									printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 29 \n", mes);
+								}
+
+							}
+							else {
+								//Año normal
+
+								if (dia >= 1 && dia <= 28) {
+
+									OK = 1;
+								}
+								else {
+									OK = 0;
+									printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+									printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 28 \n", mes);
+								}
+							}
+						}
+
+
+						
+						break;
+
+					case 3:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 4:
+						if (dia >= 1 && dia <= 30) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
+						}
+						break;
+					case 5:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 6:
+						if (dia >= 1 && dia <= 30) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
+						}
+						break;
+					case 7:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 8:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 9:
+						if (dia >= 1 && dia <= 30) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
+						}
+						break;
+					case 10:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+					case 11:
+						if (dia >= 1 && dia <= 30) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
+						}
+						break;
+					case 12:
+						if (dia >= 1 && dia <= 31) {
+							OK = 1;
+						}
+						else {
+							OK = 0;
+							printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+							printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
+						}
+						break;
+
+					default:
+						OK = 0;
+						break;
+					}
+				
 			}
-		}
 		// anyo NO bisiesto
 		// vigilem amb :febrer 28
 		else {
@@ -256,6 +343,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 2:
@@ -264,6 +353,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 28 \n", mes);
 				}
 				break;
 
@@ -273,6 +364,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 4:
@@ -281,6 +374,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
 				}
 				break;
 			case 5:
@@ -289,6 +384,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 6:
@@ -297,6 +394,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
 				}
 				break;
 			case 7:
@@ -305,6 +404,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 8:
@@ -313,6 +414,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 9:
@@ -321,6 +424,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
 				}
 				break;
 			case 10:
@@ -329,6 +434,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 			case 11:
@@ -337,6 +444,8 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 30 \n", mes);
 				}
 				break;
 			case 12:
@@ -345,27 +454,37 @@ int tiempoCorrecto() {
 				}
 				else {
 					OK = 0;
+					printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+					printf("La fecha en el mes %d ha de ser mas grande que 1 i mas pequeño de 31 \n", mes);
 				}
 				break;
 
 			default:
 				OK = 0;
+				printf("Error, fecha incorrecta en el atleta %d.\n", personas);
+				printf("La fecha solo puede tener como maximo 12 meses. Usted ha intoducido \n");
 				break;
 			}
 		}
 
 		//Si dia,mes,any son incorrectes, retorna la persona que te lerror.
 		if (OK == 0) {
-			persona_fora_temps = personas;
-			return persona_fora_temps;
+			return 1;
 		}
-		
-	}
+
+	}		
+
 	//Si dia,mes,any son correctes, retorna 0
 	return 0;
 }
 
-//Aquesta funcio Processa els nous atletes
+/***********************************************
+*
+* @Finalitat: Processa els nous atletes.
+* @Parametres: in: cantidadpersonas = Nombre de persones introduides en la cadena de caràcters.
+* @Retorn: ---
+*
+************************************************/
 //Entrem a la funcio la quantitat de noves persones que volem amb "cantidadpersonas".
 void procesaNuevasPersonas(int cantidadpersonas) {
 	
@@ -384,10 +503,8 @@ void procesaNuevasPersonas(int cantidadpersonas) {
 		//pocessem les persones noves,revisem la data, si esta incorrecte, NO PROCESSEM RES!
 		in_time = tiempoCorrecto();
 
-		if (in_time != 0) {
-			printf("Error, fecha incorrecta en el atleta %d.\n", in_time);
-		}
-		else {
+		if (in_time == 0) {
+
 			while (info[index] != '$') {
 				index++;
 			}
@@ -486,8 +603,13 @@ void procesaNuevasPersonas(int cantidadpersonas) {
 		error(1);
 	}
 }
-
-//Funcio que ens gestiona el resultat de "cantidadNuevaInfo()"
+/***********************************************
+*
+* @Finalitat: Gestiona el resultat de "cantidadNuevaInfo()".
+* @Parametres: ---
+* @Retorn: ---
+*
+************************************************/
 void contadorNuevasPersonas() {
 
 	switch (cantidadNuevaInfo())
@@ -502,8 +624,13 @@ void contadorNuevasPersonas() {
 		procesaNuevasPersonas(cantidadNuevaInfo());
 	}
 }
-
-//Funcio que llegeix el text introduit
+/***********************************************
+*
+* @Finalitat: Llegeix el text introduit.
+* @Parametres: ---
+* @Retorn: ---
+*
+************************************************/
 void introducirInfo() {
 	printf("Atletas:");
 	fflushnou();
@@ -511,12 +638,21 @@ void introducirInfo() {
 	contadorNuevasPersonas();
 }
 
+//Part 2:
 
-
-//Part 2: Consultar Marques
+/***********************************************
+*
+* @Finalitat: Imprimeix les marques dels atletes per categoria.
+* @Parametres: ---
+* @Retorn: ---
+*
+************************************************/
 void verMarcas() {
 
 	int j;
+	int contadorA = 0;
+	int contadorB = 0;
+	int contadorC = 0;
 	//revisem si s'han ficat atletes
 	if (num_atletes > 0 ) {
 
@@ -524,20 +660,33 @@ void verMarcas() {
 		//Per cada atleta imprimim en pantalla el seu nom - marca
 		for (j = 1; j <= num_atletes; j++) {
 			if (atletes[j].prova == 'A') {
+				contadorA++;
 				printf("\t%s - %.2f\n", atletes[j].nom, atletes[j].marca);
 			}
+		}
+		if (contadorA == 0) {
+			printf("\t---\n");
 		}
 		printf("Prueba B:\n");
 		for (j = 1; j <= num_atletes; j++) {
 			if (atletes[j].prova == 'B') {
+				contadorB++;
 				printf("\t%s - %.2f\n", atletes[j].nom, atletes[j].marca);
 			}
+		}
+		if (contadorB == 0) {
+			printf("\t---\n");
 		}
 		printf("Prueba C:\n");
 		for (j = 1; j <= num_atletes; j++) {
 			if (atletes[j].prova == 'C') {
+				contadorC++;
 				printf("\t%s - %.2f\n", atletes[j].nom, atletes[j].marca);
 			}
+			
+		}
+		if (contadorC == 0) {
+			printf("\t---\n\n");
 		}
 	}
 	else {
@@ -545,8 +694,15 @@ void verMarcas() {
 		error(2);
 	}
 }
+//Part 3:
 
-//Part 3: Veure estadístiques
+/***********************************************
+*
+* @Finalitat: Imprimeix les estadístiques de les proves.
+* @Parametres: ---
+* @Retorn: ---
+*
+************************************************/
 void verEstadisticas() {
 
 	int j;
@@ -669,6 +825,7 @@ void verEstadisticas() {
 		error(2);
 	}
 }
+
 
 
 void main() {
